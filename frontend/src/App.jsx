@@ -1,47 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
-import Dashboard from './pages/Dashboard';
-import PredictionStudio from './pages/PredictionStudio';
-import ModelLab from './pages/ModelLab';
-import AnomalyMonitor from './pages/AnomalyMonitor';
-import BillSimulator from './pages/BillSimulator';
-import DatasetExplorer from './pages/DatasetExplorer';
-import EnvironmentalImpact from './pages/EnvironmentalImpact';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Calculator from './pages/Calculator';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('dashboard');
-
-  const renderPage = () => {
-    switch (activeTab) {
-      case 'dashboard':
-        return <Dashboard />;
-      case 'prediction':
-        return <PredictionStudio />;
-      case 'models':
-        return <ModelLab />;
-      case 'anomalies':
-        return <AnomalyMonitor />;
-      case 'simulator':
-        return <BillSimulator />;
-      case 'datasets':
-        return <DatasetExplorer />;
-      case 'environmental':
-        return <EnvironmentalImpact />;
-      default:
-        return <Dashboard />;
+  const [currentPage, setCurrentPage] = useState(() => {
+    if (typeof window !== 'undefined' && window.location.pathname.includes('calculator')) {
+      return 'calculator';
     }
+    return 'home';
+  });
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (window.location.pathname.includes('calculator')) {
+        setCurrentPage('calculator');
+      } else {
+        setCurrentPage('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigateTo = (page) => {
+    setCurrentPage(page);
+    const targetPath = page === 'calculator' ? '/calculator' : '/';
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({}, '', targetPath);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="app-container" style={{ display: 'flex', minHeight: '100vh' }}>
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <Navbar />
-        <main style={{ padding: '24px', flex: 1, overflowY: 'auto' }}>
-          {renderPage()}
-        </main>
-      </div>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+      backgroundColor: 'var(--bg-cream)'
+    }}>
+      <Navbar activePage={currentPage} onNavigate={navigateTo} />
+      
+      <main style={{ flex: 1 }}>
+        {currentPage === 'calculator' ? (
+          <Calculator onNavigate={navigateTo} />
+        ) : (
+          <Home onNavigate={navigateTo} />
+        )}
+      </main>
+
+      <Footer onNavigate={navigateTo} />
     </div>
   );
 }
