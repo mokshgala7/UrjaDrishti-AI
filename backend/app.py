@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from config import Config
 from database.models import init_db
+from database.connection import register_db_teardown
 from utils.error_handlers import register_error_handlers
 
 from routes.health_routes import health_bp
@@ -25,7 +26,10 @@ def create_app(config_class=Config):
     # Centralized Error Handlers
     register_error_handlers(app)
 
-    # Initialize SQLite database schema
+    # Scoped database session teardown hook
+    register_db_teardown(app)
+
+    # Initialize database schema (safe checkfirst)
     init_db()
 
     # Register Blueprints for /api/v1 (Canonical API surface)

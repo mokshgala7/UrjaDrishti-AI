@@ -19,6 +19,11 @@ export async function fetchStatus() {
   return handleResponse(res);
 }
 
+export async function fetchDatabaseHealth() {
+  const res = await fetch(`${API_BASE_URL}/health/database`);
+  return res.json();
+}
+
 // Dashboard
 export async function fetchDashboardSummary() {
   const res = await fetch(`${API_BASE_URL}/dashboard/summary`);

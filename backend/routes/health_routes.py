@@ -5,19 +5,22 @@ from flask import Blueprint, jsonify
 from config import Config
 from utils.csv_loader import registry
 from services.model_service import get_model_registry
-from database.connection import get_db_connection
+from database.connection import check_database_health
 
 health_bp = Blueprint('health', __name__)
 
 def _check_db_status():
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT 1")
-        conn.close()
-        return "connected"
-    except Exception:
-        return "degraded_sqlite_fallback"
+    db_health = check_database_health()
+    if db_health.get("connected"):
+        return f"connected ({db_health.get('database_type', 'mysql')})"
+    return f"disconnected ({db_health.get('database_type', 'mysql')} unreachable at {db_health.get('host', '127.0.0.1')})"
+
+@health_bp.route('/health/database', methods=['GET'])
+def health_database():
+    """Dedicated database connection health check."""
+    status = check_database_health()
+    status_code = 200 if status.get("connected") else 503
+    return jsonify(status), status_code
 
 @health_bp.route('/health', methods=['GET'])
 def health():

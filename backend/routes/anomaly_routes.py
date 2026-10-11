@@ -1,5 +1,11 @@
 from flask import Blueprint, request
-from services.anomaly_service import detect_anomalies, get_anomaly_summary, get_anomaly_by_id
+from services.anomaly_service import (
+    detect_anomalies,
+    get_anomaly_summary,
+    get_anomaly_by_id,
+    persist_anomaly_events,
+    get_persisted_anomalies
+)
 from utils.response_helpers import success_response
 
 anomaly_bp = Blueprint('anomalies', __name__)
@@ -22,6 +28,12 @@ def list_anomalies_route():
     )
     return success_response(results, metadata={"count": len(results), "detector": "Isolation Forest"})
 
+@anomaly_bp.route('/history', methods=['GET'])
+def anomaly_history_route():
+    limit = int(request.args.get('limit', 50))
+    history = get_persisted_anomalies(limit=limit)
+    return success_response(history, metadata={"count": len(history)})
+
 @anomaly_bp.route('/summary', methods=['GET'])
 def anomaly_summary_route():
     summary = get_anomaly_summary()
@@ -39,4 +51,6 @@ def run_detection_route():
     household = data.get('household')
     
     results = detect_anomalies(data=records, household=household)
+    if results:
+        persist_anomaly_events(results)
     return success_response(results, metadata={"anomalies_detected": len(results)})

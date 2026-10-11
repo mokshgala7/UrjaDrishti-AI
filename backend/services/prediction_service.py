@@ -9,7 +9,8 @@ import joblib
 
 from config import Config
 from utils.error_handlers import AppError
-from database.connection import get_db_connection
+from database.connection import get_db_session
+from database.models import PredictionHistory
 
 logger = logging.getLogger(__name__)
 
@@ -113,22 +114,18 @@ def predict_load(input_data: dict) -> dict:
 
     # Persist prediction in DB
     try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO prediction_history (created_at, model_id, horizon_hours, predicted_load_kw, confidence_lower, confidence_upper, input_features)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            result["created_at"],
-            canonical_model_id,
-            1,
-            pred_val,
-            lower_bound,
-            upper_bound,
-            json.dumps(result["features_evaluated"])
-        ))
-        conn.commit()
-        conn.close()
+        with get_db_session() as session:
+            created_dt = datetime.strptime(result["created_at"], "%Y-%m-%d %H:%M:%S")
+            pred_record = PredictionHistory(
+                created_at=created_dt,
+                model_id=canonical_model_id,
+                horizon_hours=1,
+                predicted_load_kw=pred_val,
+                confidence_lower=lower_bound,
+                confidence_upper=upper_bound,
+                input_features=json.dumps(result["features_evaluated"])
+            )
+            session.add(pred_record)
     except Exception as e:
         logger.warning("Failed to persist prediction to database: %s", str(e))
 
@@ -174,30 +171,21 @@ def generate_horizon_forecast(horizon_hours: int = 24, model_id: str = "random_f
 
 def get_prediction_history(limit: int = 50) -> list:
     try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute('''
-            SELECT id, created_at, model_id, horizon_hours, predicted_load_kw, confidence_lower, confidence_upper, input_features
-            FROM prediction_history
-            ORDER BY id DESC
-            LIMIT ?
-        ''', (limit,))
-        rows = cursor.fetchall()
-        conn.close()
-        
-        results = []
-        for r in rows:
-            results.append({
-                "id": r["id"],
-                "created_at": r["created_at"],
-                "model_id": r["model_id"],
-                "horizon_hours": r["horizon_hours"],
-                "predicted_load_kw": r["predicted_load_kw"],
-                "confidence_lower": r["confidence_lower"],
-                "confidence_upper": r["confidence_upper"],
-                "features": json.loads(r["input_features"]) if r["input_features"] else {}
-            })
-        return results
+        with get_db_session() as session:
+            rows = session.query(PredictionHistory).order_by(PredictionHistory.id.desc()).limit(limit).all()
+            results = []
+            for r in rows:
+                results.append({
+                    "id": r.id,
+                    "created_at": r.created_at.strftime("%Y-%m-%d %H:%M:%S") if hasattr(r.created_at, "strftime") else str(r.created_at),
+                    "model_id": r.model_id,
+                    "horizon_hours": r.horizon_hours,
+                    "predicted_load_kw": float(r.predicted_load_kw) if r.predicted_load_kw is not None else 0.0,
+                    "confidence_lower": float(r.confidence_lower) if r.confidence_lower is not None else None,
+                    "confidence_upper": float(r.confidence_upper) if r.confidence_upper is not None else None,
+                    "features": json.loads(r.input_features) if r.input_features else {}
+                })
+            return results
     except Exception as e:
         logger.warning("Could not read prediction history from DB: %s", str(e))
         return []

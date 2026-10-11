@@ -183,3 +183,50 @@ def get_anomaly_by_id(anomaly_id: str):
         if a["anomaly_id"] == anomaly_id:
             return a
     raise AppError(f"Anomaly with ID '{anomaly_id}' not found.", error_code="ANOMALY_NOT_FOUND", status_code=404)
+
+def persist_anomaly_events(anomalies: list) -> int:
+    """Persists detected anomaly events into the anomaly_events table."""
+    from database.connection import get_db_session
+    from database.models import AnomalyEvent
+    persisted = 0
+    try:
+        with get_db_session() as session:
+            for a in anomalies:
+                ts_val = a.get("timestamp")
+                if isinstance(ts_val, str):
+                    try:
+                        ts = datetime.strptime(ts_val, "%Y-%m-%d %H:%M:%S")
+                    except Exception:
+                        ts = datetime.utcnow()
+                elif isinstance(ts_val, datetime):
+                    ts = ts_val
+                else:
+                    ts = datetime.utcnow()
+
+                event = AnomalyEvent(
+                    timestamp=ts,
+                    household_id=a.get("household_id", "HH_01"),
+                    actual_kwh=a.get("actual_kwh", 0.0),
+                    expected_kwh=a.get("expected_kwh"),
+                    severity=a.get("severity", "LOW"),
+                    score=a.get("anomaly_score"),
+                    detector=a.get("detection_method", "Isolation Forest"),
+                    is_ground_truth=bool(a.get("is_ground_truth", False))
+                )
+                session.add(event)
+                persisted += 1
+    except Exception as e:
+        logger.warning("Could not persist anomaly events to database: %s", str(e))
+    return persisted
+
+def get_persisted_anomalies(limit: int = 50) -> list:
+    """Retrieves persisted anomaly events from MySQL."""
+    from database.connection import get_db_session
+    from database.models import AnomalyEvent
+    try:
+        with get_db_session() as session:
+            rows = session.query(AnomalyEvent).order_by(AnomalyEvent.id.desc()).limit(limit).all()
+            return [r.to_dict() for r in rows]
+    except Exception as e:
+        logger.warning("Could not query persisted anomaly events from DB: %s", str(e))
+        return []
