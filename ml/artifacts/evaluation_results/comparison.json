@@ -1,0 +1,47 @@
+{
+  "evaluation_dataset": "Mumbai Household Hourly Synthetic Load (Holdout Test Split 20%)",
+  "evaluation_period": "Temporal chronological split",
+  "models": [
+    {
+      "id": "random_forest",
+      "name": "Random Forest Regressor",
+      "algorithm": "Ensemble Bagging Trees",
+      "status": "available",
+      "metrics": {
+        "mae": 0.1208,
+        "rmse": 0.1513,
+        "r2": 0.9269
+      }
+    },
+    {
+      "id": "decision_tree",
+      "name": "Decision Tree Regressor",
+      "algorithm": "CART Decision Tree",
+      "status": "available",
+      "metrics": {
+        "mae": 0.1297,
+        "rmse": 0.1636,
+        "r2": 0.9145
+      }
+    },
+    {
+      "id": "linear_regression",
+      "name": "Linear Regression",
+      "algorithm": "Ordinary Least Squares",
+      "status": "available",
+      "metrics": {
+        "mae": 0.2205,
+        "rmse": 0.2901,
+        "r2": 0.7311
+      }
+    },
+    {
+      "id": "chronos_forecaster",
+      "name": "Chronos Forecaster",
+      "algorithm": "Pre-trained Chronos T5 Transformer",
+      "status": "unavailable",
+      "status_reason": "PyTorch / Hugging Face chronos runtime not installed in environment.",
+      "metrics": null
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+slab_min_kwh,slab_max_kwh,energy_charge_per_kwh,wheeling_charge_per_kwh,fixed_charge_rs
+0,100,4.50,1.65,140
+101,300,7.20,1.65,140
+301,500,9.10,1.65,140
+501,99999,11.50,1.65,140

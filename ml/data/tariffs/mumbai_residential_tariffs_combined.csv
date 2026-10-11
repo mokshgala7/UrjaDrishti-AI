@@ -1,0 +1,9 @@
+provider,slab,rate_per_kwh,wheeling_charge,fixed_charge
+Adani Electricity,0-100,4.50,1.65,140
+Adani Electricity,101-300,7.20,1.65,140
+Adani Electricity,301-500,9.10,1.65,140
+Adani Electricity,>500,11.50,1.65,140
+BEST Undertaking,0-100,3.90,1.45,120
+BEST Undertaking,101-300,6.80,1.45,120
+BEST Undertaking,301-500,8.90,1.45,120
+BEST Undertaking,>500,10.80,1.45,120
