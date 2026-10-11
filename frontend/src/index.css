@@ -150,6 +150,60 @@ button {
   }
 }
 
+@keyframes bulbGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.75));
+  }
+}
+
+@keyframes fanRotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes robotWiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes digitBump {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+    color: var(--fresh-green);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes sparkPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
 /* Accessible reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

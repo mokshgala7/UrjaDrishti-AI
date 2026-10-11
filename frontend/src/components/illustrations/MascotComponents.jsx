@@ -1,9 +1,121 @@
 import React from 'react';
-import leafMascotImg from '../../assets/illustrations/leaf-mascot.jpg';
+import robotReceiptImg from '../../assets/illustrations/robot-holding-receipt.jpg';
+import robotLeafTreeImg from '../../assets/illustrations/robot-leaf-tree.jpg';
 import cuteMeterImg from '../../assets/illustrations/cute-meter.jpg';
 import celebrationImg from '../../assets/illustrations/celebrating-savings.jpg';
+import robotPointingImg from '../../assets/illustrations/robot-pointing-cta.jpg';
 
-// Cute Leaf Character Card for Environmental Impact
+/**
+ * Robot Mascot Badge for Page Headers (e.g., Calculator header)
+ */
+export function RobotHeaderBadge({ size = 46 }) {
+  return (
+    <div style={{
+      width: `${size}px`,
+      height: `${size}px`,
+      borderRadius: '50%',
+      overflow: 'hidden',
+      border: '2.5px solid var(--primary-forest)',
+      backgroundColor: '#FFFFFF',
+      boxShadow: 'var(--shadow-sm)',
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      animation: 'floatSlow 4s ease-in-out infinite'
+    }}>
+      <img
+        src={robotPointingImg}
+        alt="UrjaBot Mascot"
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+    </div>
+  );
+}
+
+/**
+ * Robot Mascot Holding Receipt Card (Calculator Result Section)
+ */
+export function RobotBillReceiptCard({ totalBill, provider, financialYear }) {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '16px',
+      backgroundColor: 'var(--bg-lime-soft)',
+      border: '1.5px solid var(--soft-lime-dark)',
+      borderRadius: 'var(--radius-lg)',
+      padding: '16px 20px',
+      marginBottom: '20px',
+      animation: 'popIn 0.3s ease-out'
+    }}>
+      <div style={{
+        width: '68px',
+        height: '68px',
+        borderRadius: '50%',
+        overflow: 'hidden',
+        border: '3px solid #FFFFFF',
+        boxShadow: 'var(--shadow-sm)',
+        flexShrink: 0,
+        backgroundColor: '#FFFFFF',
+        animation: 'robotWiggle 4s ease-in-out infinite'
+      }}>
+        <img
+          src={robotReceiptImg}
+          alt="UrjaBot holding electricity bill receipt"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      </div>
+
+      <div style={{ flex: 1 }}>
+        <div style={{
+          fontSize: '11px',
+          fontWeight: 800,
+          color: 'var(--primary-forest)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em'
+        }}>
+          Verified MERC Bill Estimate
+        </div>
+        <div style={{
+          fontSize: '15px',
+          fontWeight: 800,
+          color: 'var(--text-charcoal)',
+          marginTop: '2px'
+        }}>
+          ₹{totalBill?.toLocaleString()} <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>calculated by UrjaBot</span>
+        </div>
+        <div style={{
+          fontSize: '11px',
+          color: 'var(--text-muted)',
+          marginTop: '2px'
+        }}>
+          {provider} • {financialYear} residential LT-I schedule
+        </div>
+      </div>
+
+      <div style={{
+        backgroundColor: '#FFFFFF',
+        color: 'var(--primary-forest)',
+        padding: '6px 12px',
+        borderRadius: 'var(--radius-full)',
+        fontSize: '12px',
+        fontWeight: 800,
+        border: '1px solid var(--border-light)',
+        boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '4px'
+      }}>
+        <span>✓</span>
+        <span>Valid</span>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Environmental Impact Mascot Card with UrjaBot holding glowing leaf
+ */
 export function LeafImpactMascot({ co2Kg, treesOffset }) {
   return (
     <div style={{
@@ -28,8 +140,8 @@ export function LeafImpactMascot({ co2Kg, treesOffset }) {
         animation: 'swaySoft 4s ease-in-out infinite'
       }}>
         <img
-          src={leafMascotImg}
-          alt="Cheerful green leaf sustainability mascot"
+          src={robotLeafTreeImg}
+          alt="UrjaBot holding glowing leaf beside green sapling tree"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
       </div>
@@ -37,7 +149,7 @@ export function LeafImpactMascot({ co2Kg, treesOffset }) {
       <div style={{ flex: 1 }}>
         <div style={{
           fontSize: '12px',
-          fontWeight: 700,
+          fontWeight: 800,
           color: 'var(--primary-forest)',
           textTransform: 'uppercase',
           letterSpacing: '0.04em'
@@ -65,7 +177,9 @@ export function LeafImpactMascot({ co2Kg, treesOffset }) {
   );
 }
 
-// Interactive Meter Illustration Display
+/**
+ * Interactive Meter Illustration Header for Calculator
+ */
 export function MeterCharacterHeader({ units }) {
   return (
     <div style={{
@@ -77,7 +191,7 @@ export function MeterCharacterHeader({ units }) {
       borderRadius: 'var(--radius-md)',
       border: '1px solid var(--border-light)',
       boxShadow: 'var(--shadow-sm)',
-      marginBottom: '20px'
+      marginBottom: '16px'
     }}>
       <div style={{
         width: '54px',
@@ -86,7 +200,8 @@ export function MeterCharacterHeader({ units }) {
         overflow: 'hidden',
         border: '2px solid var(--fresh-green)',
         flexShrink: 0,
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        animation: 'floatSlow 4s ease-in-out infinite'
       }}>
         <img
           src={cuteMeterImg}
@@ -97,7 +212,7 @@ export function MeterCharacterHeader({ units }) {
 
       <div style={{ flex: 1 }}>
         <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
-          Smart Meter Simulation
+          Smart Meter Telemetry
         </div>
         <div style={{
           fontSize: '18px',
@@ -107,7 +222,7 @@ export function MeterCharacterHeader({ units }) {
           alignItems: 'baseline',
           gap: '4px'
         }}>
-          <span>{units}</span>
+          <span key={units} style={{ animation: 'digitBump 0.2s ease-out' }}>{units}</span>
           <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)' }}>kWh / Month</span>
         </div>
       </div>
@@ -126,7 +241,9 @@ export function MeterCharacterHeader({ units }) {
   );
 }
 
-// Savings Celebration Card
+/**
+ * Savings Celebration Card
+ */
 export function SavingsCelebrationCard({ originalBill, reducedBill, percent, unitReduction }) {
   const savings = Math.max(0, Math.round(originalBill - reducedBill));
 
@@ -150,7 +267,8 @@ export function SavingsCelebrationCard({ originalBill, reducedBill, percent, uni
         border: '3px solid #FFFFFF',
         boxShadow: 'var(--shadow-sm)',
         flexShrink: 0,
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        animation: 'robotWiggle 3.5s ease-in-out infinite'
       }}>
         <img
           src={celebrationImg}
@@ -165,9 +283,13 @@ export function SavingsCelebrationCard({ originalBill, reducedBill, percent, uni
           fontWeight: 700,
           color: '#B45309',
           textTransform: 'uppercase',
-          letterSpacing: '0.04em'
+          letterSpacing: '0.04em',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px'
         }}>
-          {percent}% Conservation Opportunity
+          <span>🎉</span>
+          <span>{percent}% Conservation Opportunity</span>
         </div>
         <div style={{
           fontSize: '14px',

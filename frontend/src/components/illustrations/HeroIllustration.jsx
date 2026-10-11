@@ -1,5 +1,5 @@
 import React from 'react';
-import heroHomeImg from '../../assets/illustrations/hero-solar-home.jpg';
+import heroRobotHomeImg from '../../assets/illustrations/hero-robot-home.jpg';
 
 export default function HeroIllustration() {
   return (
@@ -16,7 +16,7 @@ export default function HeroIllustration() {
         left: '10%',
         width: '80%',
         height: '80%',
-        background: 'radial-gradient(circle, rgba(220, 236, 181, 0.45) 0%, rgba(250, 248, 240, 0) 70%)',
+        background: 'radial-gradient(circle, rgba(220, 236, 181, 0.5) 0%, rgba(250, 248, 240, 0) 70%)',
         zIndex: 0,
         borderRadius: '50%'
       }} />
@@ -33,8 +33,8 @@ export default function HeroIllustration() {
         transition: 'transform 0.3s ease, box-shadow 0.3s ease'
       }}>
         <img
-          src={heroHomeImg}
-          alt="Friendly cartoon Indian home with rooftop solar panels and smiling sun"
+          src={heroRobotHomeImg}
+          alt="UrjaBot the friendly electricity robot mascot waving hello in front of a sunny Indian solar home"
           style={{
             width: '100%',
             height: 'auto',
@@ -43,7 +43,43 @@ export default function HeroIllustration() {
           }}
         />
 
-        {/* Floating animated sun badge in upper corner */}
+        {/* Floating UrjaBot Speech Bubble Badge */}
+        <div style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '20px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          padding: '10px 16px',
+          borderRadius: 'var(--radius-full)',
+          boxShadow: '0 6px 20px rgba(40, 89, 67, 0.15)',
+          border: '1.5px solid var(--soft-lime)',
+          backdropFilter: 'blur(4px)',
+          animation: 'floatSlow 4.5s ease-in-out infinite'
+        }}>
+          <span style={{ fontSize: '18px', animation: 'robotWiggle 3s ease-in-out infinite' }}>👋</span>
+          <div>
+            <div style={{
+              fontSize: '13px',
+              fontWeight: 800,
+              color: 'var(--primary-forest)',
+              lineHeight: 1.2
+            }}>
+              "Meet UrjaBot!"
+            </div>
+            <div style={{
+              fontSize: '11px',
+              fontWeight: 600,
+              color: 'var(--text-muted)'
+            }}>
+              Your friendly electricity assistant
+            </div>
+          </div>
+        </div>
+
+        {/* Floating Solar & Green Energy Badge in upper corner */}
         <div style={{
           position: 'absolute',
           top: '18px',
@@ -56,7 +92,8 @@ export default function HeroIllustration() {
           borderRadius: 'var(--radius-full)',
           boxShadow: '0 4px 16px rgba(40, 89, 67, 0.12)',
           border: '1px solid var(--border-light)',
-          animation: 'floatSlow 4s ease-in-out infinite'
+          backdropFilter: 'blur(4px)',
+          animation: 'floatSlow 4s ease-in-out infinite 1s'
         }}>
           <div style={{
             width: '22px',
@@ -74,35 +111,10 @@ export default function HeroIllustration() {
           </div>
           <span style={{
             fontSize: '13px',
-            fontWeight: 700,
+            fontWeight: 800,
             color: 'var(--primary-forest)'
           }}>
-            Solar Powered
-          </span>
-        </div>
-
-        {/* Floating animated meter badge in lower corner */}
-        <div style={{
-          position: 'absolute',
-          bottom: '18px',
-          left: '18px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          padding: '8px 14px',
-          borderRadius: 'var(--radius-full)',
-          boxShadow: '0 4px 16px rgba(40, 89, 67, 0.12)',
-          border: '1px solid var(--border-light)',
-          animation: 'floatSlow 4.5s ease-in-out infinite 1.5s'
-        }}>
-          <span style={{ fontSize: '16px' }}>🌱</span>
-          <span style={{
-            fontSize: '13px',
-            fontWeight: 700,
-            color: 'var(--primary-forest)'
-          }}>
-            100% Honest MERC Tariffs
+            Rooftop Solar Ready
           </span>
         </div>
       </div>

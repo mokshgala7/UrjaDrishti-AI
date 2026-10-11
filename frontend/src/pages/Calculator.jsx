@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { calculateBill, calculateEnvironmental } from '../services/api';
 import {
+  RobotHeaderBadge,
+  RobotBillReceiptCard,
   MeterCharacterHeader,
   LeafImpactMascot,
   SavingsCelebrationCard
 } from '../components/illustrations/MascotComponents';
+import { InteractiveElectricityMeter } from '../components/illustrations/CartoonObjects';
 
 export default function Calculator() {
   // Calculator Inputs
@@ -96,20 +99,28 @@ export default function Calculator() {
           margin: '32px auto 44px auto'
         }}>
           <div style={{
-            display: 'inline-flex',
+            display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            backgroundColor: 'var(--soft-lime)',
-            color: 'var(--primary-forest)',
-            padding: '6px 14px',
-            borderRadius: 'var(--radius-full)',
-            fontSize: '12px',
-            fontWeight: 800,
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
+            justifyContent: 'center',
+            gap: '12px',
             marginBottom: '14px'
           }}>
-            ⚡ ELECTRICITY COST CALCULATOR
+            <RobotHeaderBadge size={44} />
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              backgroundColor: 'var(--soft-lime)',
+              color: 'var(--primary-forest)',
+              padding: '6px 14px',
+              borderRadius: 'var(--radius-full)',
+              fontSize: '12px',
+              fontWeight: 800,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase'
+            }}>
+              ⚡ ELECTRICITY COST CALCULATOR
+            </div>
           </div>
 
           <h1 style={{
@@ -355,6 +366,11 @@ export default function Calculator() {
                 <span>💡</span>
                 <span>1 electricity unit = 1 kWh</span>
               </div>
+
+              {/* Animated Interactive Electricity Meter */}
+              <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
+                <InteractiveElectricityMeter units={units} width={340} />
+              </div>
             </div>
 
             {/* INPUT 3: BILLING PERIOD */}
@@ -581,6 +597,12 @@ export default function Calculator() {
             {/* RESULT 1: ESTIMATED MONTHLY ELECTRICITY BILL */}
             {isCalculable && (
               <div>
+                {/* Robot Bill Receipt Mascot Card */}
+                <RobotBillReceiptCard
+                  totalBill={billResult.total_bill}
+                  provider={billResult.provider}
+                  financialYear={billResult.financial_year}
+                />
                 <div style={{
                   backgroundColor: 'var(--bg-cream)',
                   borderRadius: 'var(--radius-lg)',

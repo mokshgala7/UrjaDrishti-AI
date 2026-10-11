@@ -1,13 +1,19 @@
 import React from 'react';
 import HeroIllustration from '../components/illustrations/HeroIllustration';
 import {
-  CartoonBillIcon,
-  CartoonSavingsIcon,
-  CartoonPlanetIcon,
-  CartoonStep1Icon,
-  CartoonStep2Icon,
-  CartoonStep3Icon
-} from '../components/illustrations/AnimatedIcons';
+  FriendlyLightbulb,
+  AnimatedCeilingFan,
+  FriendlyPlug,
+  FriendlySolarPanel
+} from '../components/illustrations/CartoonObjects';
+
+import robotBillImg from '../assets/illustrations/robot-bill.jpg';
+import humanRobotMeterImg from '../assets/illustrations/human-robot-meter.jpg';
+import robotLeafTreeImg from '../assets/illustrations/robot-leaf-tree.jpg';
+import step1PersonImg from '../assets/illustrations/step1-person-input.jpg';
+import step2RobotCalcImg from '../assets/illustrations/step2-robot-calculating.jpg';
+import step3PersonReviewImg from '../assets/illustrations/step3-person-reviewing.jpg';
+import robotPointingCtaImg from '../assets/illustrations/robot-pointing-cta.jpg';
 
 export default function Home({ onNavigate }) {
   const scrollToHowItWorks = (e) => {
@@ -20,12 +26,14 @@ export default function Home({ onNavigate }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '80px', paddingBottom: '60px' }}>
-      {/* SECTION B: HERO SECTION */}
+      {/* ========================================================= */}
+      {/* SECTION B: HERO SECTION                                   */}
+      {/* ========================================================= */}
       <section style={{ paddingTop: '32px' }}>
         <div className="container hero-grid">
-          {/* LEFT SIDE */}
+          {/* LEFT SIDE: HEADING & INTRO */}
           <div style={{ maxWidth: '540px' }}>
-            {/* Small introductory label */}
+            {/* Small introductory badge */}
             <div style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -70,7 +78,7 @@ export default function Home({ onNavigate }) {
               lineHeight: 1.6,
               marginBottom: '32px'
             }}>
-              Estimate your electricity bill, explore ways to save, and discover how cleaner energy can make a difference.
+              Meet <strong>UrjaBot</strong>, your friendly electricity assistant. Estimate your electricity bill, explore ways to save, and discover how cleaner energy makes a difference.
             </p>
 
             {/* CTA Buttons */}
@@ -129,14 +137,16 @@ export default function Home({ onNavigate }) {
             </div>
           </div>
 
-          {/* RIGHT SIDE: CARTOON ILLUSTRATION */}
+          {/* RIGHT SIDE: HERO CARTOON ILLUSTRATION */}
           <div>
             <HeroIllustration />
           </div>
         </div>
       </section>
 
-      {/* SECTION C: THREE SIMPLE BENEFITS */}
+      {/* ========================================================= */}
+      {/* SECTION C: THREE SIMPLE BENEFITS                          */}
+      {/* ========================================================= */}
       <section>
         <div className="container">
           <div style={{
@@ -162,14 +172,18 @@ export default function Home({ onNavigate }) {
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '24px'
           }}>
-            {/* Benefit 1 */}
+            {/* Benefit 1: Understand Your Bill */}
             <div style={{
               backgroundColor: '#FFFFFF',
               borderRadius: 'var(--radius-xl)',
-              padding: '36px 28px',
+              padding: '28px 24px',
               border: '1px solid var(--border-light)',
               boxShadow: 'var(--shadow-sm)',
-              transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-4px)';
@@ -180,18 +194,24 @@ export default function Home({ onNavigate }) {
               e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
             }}
             >
+              {/* Illustration Frame */}
               <div style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '16px',
+                width: '120px',
+                height: '120px',
+                borderRadius: '24px',
+                overflow: 'hidden',
                 backgroundColor: 'var(--bg-subtle)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '20px'
+                marginBottom: '20px',
+                boxShadow: 'var(--shadow-sm)',
+                border: '2px solid var(--border-light)'
               }}>
-                <CartoonBillIcon size={46} />
+                <img
+                  src={robotBillImg}
+                  alt="UrjaBot holding an electricity bill"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
+
               <h3 style={{
                 fontSize: '18px',
                 fontWeight: 800,
@@ -207,14 +227,18 @@ export default function Home({ onNavigate }) {
               </p>
             </div>
 
-            {/* Benefit 2 */}
+            {/* Benefit 2: Explore Savings */}
             <div style={{
               backgroundColor: '#FFFFFF',
               borderRadius: 'var(--radius-xl)',
-              padding: '36px 28px',
+              padding: '28px 24px',
               border: '1px solid var(--border-light)',
               boxShadow: 'var(--shadow-sm)',
-              transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-4px)';
@@ -225,18 +249,24 @@ export default function Home({ onNavigate }) {
               e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
             }}
             >
+              {/* Illustration Frame */}
               <div style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '16px',
+                width: '120px',
+                height: '120px',
+                borderRadius: '24px',
+                overflow: 'hidden',
                 backgroundColor: 'var(--bg-subtle)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '20px'
+                marginBottom: '20px',
+                boxShadow: 'var(--shadow-sm)',
+                border: '2px solid var(--border-light)'
               }}>
-                <CartoonSavingsIcon size={46} />
+                <img
+                  src={humanRobotMeterImg}
+                  alt="Person and UrjaBot examining smart electricity meter"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
+
               <h3 style={{
                 fontSize: '18px',
                 fontWeight: 800,
@@ -248,18 +278,22 @@ export default function Home({ onNavigate }) {
                 2. Explore Savings
               </h3>
               <p style={{ fontSize: '15px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
-                See how changes in electricity consumption can affect your estimated bill through non-linear slab rates.
+                See how changes in electricity consumption affect your estimated bill through non-linear slab rates.
               </p>
             </div>
 
-            {/* Benefit 3 */}
+            {/* Benefit 3: Environmental Impact */}
             <div style={{
               backgroundColor: '#FFFFFF',
               borderRadius: 'var(--radius-xl)',
-              padding: '36px 28px',
+              padding: '28px 24px',
               border: '1px solid var(--border-light)',
               boxShadow: 'var(--shadow-sm)',
-              transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-4px)';
@@ -270,18 +304,24 @@ export default function Home({ onNavigate }) {
               e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
             }}
             >
+              {/* Illustration Frame */}
               <div style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '16px',
+                width: '120px',
+                height: '120px',
+                borderRadius: '24px',
+                overflow: 'hidden',
                 backgroundColor: 'var(--bg-subtle)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '20px'
+                marginBottom: '20px',
+                boxShadow: 'var(--shadow-sm)',
+                border: '2px solid var(--border-light)'
               }}>
-                <CartoonPlanetIcon size={46} />
+                <img
+                  src={robotLeafTreeImg}
+                  alt="UrjaBot holding glowing leaf beside sapling tree"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
+
               <h3 style={{
                 fontSize: '18px',
                 fontWeight: 800,
@@ -290,7 +330,7 @@ export default function Home({ onNavigate }) {
                 textTransform: 'uppercase',
                 letterSpacing: '0.02em'
               }}>
-                3. Measure Environmental Impact
+                3. Environmental Impact
               </h3>
               <p style={{ fontSize: '15px', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
                 Understand the estimated carbon emissions associated with electricity consumption and illustrative tree equivalents.
@@ -300,7 +340,9 @@ export default function Home({ onNavigate }) {
         </div>
       </section>
 
-      {/* SECTION D: HOW IT WORKS */}
+      {/* ========================================================= */}
+      {/* SECTION D: HOW IT WORKS                                   */}
+      {/* ========================================================= */}
       <section id="how-it-works">
         <div className="container">
           <div style={{
@@ -333,8 +375,7 @@ export default function Home({ onNavigate }) {
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: '32px',
-              position: 'relative'
+              gap: '32px'
             }}>
               {/* Step 1 */}
               <div style={{
@@ -344,16 +385,20 @@ export default function Home({ onNavigate }) {
                 textAlign: 'center'
               }}>
                 <div style={{
-                  width: '64px',
-                  height: '64px',
-                  borderRadius: '20px',
+                  width: '130px',
+                  height: '130px',
+                  borderRadius: '28px',
+                  overflow: 'hidden',
                   backgroundColor: 'var(--bg-lime-soft)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '16px'
+                  marginBottom: '18px',
+                  boxShadow: 'var(--shadow-sm)',
+                  border: '2px solid var(--border-light)'
                 }}>
-                  <CartoonStep1Icon size={42} />
+                  <img
+                    src={step1PersonImg}
+                    alt="Step 1: Person entering electricity consumption"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
                 </div>
                 <div style={{
                   fontSize: '12px',
@@ -380,16 +425,20 @@ export default function Home({ onNavigate }) {
                 textAlign: 'center'
               }}>
                 <div style={{
-                  width: '64px',
-                  height: '64px',
-                  borderRadius: '20px',
+                  width: '130px',
+                  height: '130px',
+                  borderRadius: '28px',
+                  overflow: 'hidden',
                   backgroundColor: 'var(--bg-lime-soft)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '16px'
+                  marginBottom: '18px',
+                  boxShadow: 'var(--shadow-sm)',
+                  border: '2px solid var(--border-light)'
                 }}>
-                  <CartoonStep2Icon size={42} />
+                  <img
+                    src={step2RobotCalcImg}
+                    alt="Step 2: UrjaBot calculating estimated bill"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
                 </div>
                 <div style={{
                   fontSize: '12px',
@@ -416,16 +465,20 @@ export default function Home({ onNavigate }) {
                 textAlign: 'center'
               }}>
                 <div style={{
-                  width: '64px',
-                  height: '64px',
-                  borderRadius: '20px',
+                  width: '130px',
+                  height: '130px',
+                  borderRadius: '28px',
+                  overflow: 'hidden',
                   backgroundColor: 'var(--bg-lime-soft)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '16px'
+                  marginBottom: '18px',
+                  boxShadow: 'var(--shadow-sm)',
+                  border: '2px solid var(--border-light)'
                 }}>
-                  <CartoonStep3Icon size={42} />
+                  <img
+                    src={step3PersonReviewImg}
+                    alt="Step 3: Reviewing results with UrjaBot"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
                 </div>
                 <div style={{
                   fontSize: '12px',
@@ -448,20 +501,21 @@ export default function Home({ onNavigate }) {
         </div>
       </section>
 
-      {/* SECTION E: SIMPLE CALL TO ACTION */}
+      {/* ========================================================= */}
+      {/* SECTION E: CALL TO ACTION WITH POINTING MASCOT            */}
+      {/* ========================================================= */}
       <section>
         <div className="container">
           <div style={{
             backgroundColor: 'var(--primary-forest)',
             color: 'var(--text-on-dark)',
             borderRadius: 'var(--radius-xl)',
-            padding: '56px 36px',
-            textAlign: 'center',
+            padding: '48px 36px',
             boxShadow: 'var(--shadow-lg)',
             position: 'relative',
             overflow: 'hidden'
           }}>
-            {/* Background subtle leaf shapes */}
+            {/* Background decorative subtle circles */}
             <div style={{
               position: 'absolute',
               top: '-30px',
@@ -483,65 +537,98 @@ export default function Home({ onNavigate }) {
               pointerEvents: 'none'
             }} />
 
-            <div style={{ position: 'relative', zIndex: 1, maxWidth: '600px', margin: '0 auto' }}>
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '32px',
+              position: 'relative',
+              zIndex: 1,
+              maxWidth: '960px',
+              margin: '0 auto'
+            }}>
+              {/* Mascot pointing illustration */}
               <div style={{
-                display: 'inline-block',
-                backgroundColor: 'rgba(220, 236, 181, 0.2)',
-                color: 'var(--soft-lime)',
-                padding: '6px 14px',
-                borderRadius: 'var(--radius-full)',
-                fontSize: '12px',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                marginBottom: '16px'
+                width: '160px',
+                height: '160px',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                backgroundColor: '#FFFFFF',
+                border: '4px solid var(--soft-lime)',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+                flexShrink: 0,
+                margin: '0 auto',
+                animation: 'floatSlow 4s ease-in-out infinite'
               }}>
-                Fast & Interactive
+                <img
+                  src={robotPointingCtaImg}
+                  alt="UrjaBot cheerfully pointing towards the calculate button"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
               </div>
-              <h2 style={{
-                fontSize: 'clamp(28px, 3.5vw, 40px)',
-                fontWeight: 800,
-                color: '#FFFFFF',
-                letterSpacing: '-0.02em',
-                marginBottom: '16px'
-              }}>
-                Ready to understand your electricity bill?
-              </h2>
-              <p style={{
-                fontSize: '17px',
-                color: 'rgba(255, 255, 255, 0.85)',
-                lineHeight: 1.6,
-                marginBottom: '32px'
-              }}>
-                Start with a few details and get an estimate in seconds.
-              </p>
-              <button
-                onClick={() => onNavigate('calculator')}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: 'var(--soft-lime)',
-                  color: 'var(--primary-forest)',
-                  padding: '16px 36px',
+
+              {/* Text & Button */}
+              <div style={{ flex: '1 1 380px', textAlign: 'left' }}>
+                <div style={{
+                  display: 'inline-block',
+                  backgroundColor: 'rgba(220, 236, 181, 0.2)',
+                  color: 'var(--soft-lime)',
+                  padding: '6px 14px',
                   borderRadius: 'var(--radius-full)',
-                  fontSize: '16px',
+                  fontSize: '12px',
                   fontWeight: 800,
-                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
-                  transition: 'all 0.2s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#FFFFFF';
-                  e.currentTarget.style.transform = 'scale(1.03)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--soft-lime)';
-                  e.currentTarget.style.transform = 'scale(1)';
-                }}
-              >
-                <span>Open Calculator</span>
-                <span style={{ fontSize: '18px' }}>→</span>
-              </button>
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  marginBottom: '12px'
+                }}>
+                  Fast & Interactive
+                </div>
+                <h2 style={{
+                  fontSize: 'clamp(26px, 3.2vw, 36px)',
+                  fontWeight: 800,
+                  color: '#FFFFFF',
+                  letterSpacing: '-0.02em',
+                  marginBottom: '12px'
+                }}>
+                  Ready to calculate your electricity bill?
+                </h2>
+                <p style={{
+                  fontSize: '16px',
+                  color: 'rgba(255, 255, 255, 0.88)',
+                  lineHeight: 1.5,
+                  marginBottom: '24px'
+                }}>
+                  UrjaBot will calculate your tariff slabs, estimate environmental impact, and help you discover savings in seconds.
+                </p>
+                <button
+                  onClick={() => onNavigate('calculator')}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    backgroundColor: 'var(--soft-lime)',
+                    color: 'var(--primary-forest)',
+                    padding: '16px 36px',
+                    borderRadius: 'var(--radius-full)',
+                    fontSize: '16px',
+                    fontWeight: 800,
+                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#FFFFFF';
+                    e.currentTarget.style.transform = 'scale(1.03)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--soft-lime)';
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                >
+                  <span>Open Calculator</span>
+                  <span style={{ fontSize: '18px' }}>→</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
